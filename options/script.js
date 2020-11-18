@@ -1,23 +1,30 @@
 const blockedDomainsTextArea = document.querySelector('#blocked-domains');
 
-function storeSettings() {
-    const blockedDomains = blockedDomainsTextArea.value.split("\n");
+async function storeSettings(domainsValue) {
+    const blockedDomains = domainsValue.split("\n") || [];
+
     console.log(blockedDomains);
-    browser.storage.local.set({
+    await browser.storage.local.set({
         blockedDomains
     });
 }
 
-function loadSettings(loadedSettings) {
-    blockedDomainsTextArea.value = loadSettings.join("\n");
+async function loadSettings() {
+    let {blockedDomains} = browser.local.storage.get('blockedDomains');
+    if(!blockedDomains){
+        blockedDomains = [];
+    }
+    const domains = blockedDomains.join("\n");
+    blockedDomainsTextArea.value = domains;
+    storeSettings(domains)
 }
 
 function onError(e){
     console.error(e);
 }
 
-browser.storage.local.get().then(loadSettings, onError);
-
 console.log('heelllo');
 
-blockedDomainsTextArea.addEventListener("change", storeSettings);
+blockedDomainsTextArea.addEventListener('change', e => storeSettings(e.target.value));
+
+loadSettings().catch(onError);

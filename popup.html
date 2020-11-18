@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            padding: 1em;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+  <body>
+    <div>
+        <input type="text" id="domain" placeholder="example.com"/>
+        <button id="save">&#43;</button>
+    </div>
+    <div id="blocked-wrap">
+        <p>Blocked Domains:</p>
+        <ul id="blocked-domains"></ul>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

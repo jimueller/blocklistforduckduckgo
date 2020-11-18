@@ -16,9 +16,19 @@
 			]
 		}
 	],
+
+	"browser_action": {
+		"browser_style": true,
+		"default_icon":{
+			"48": "icons/icon.png"
+		},
+		"default_popup": "/popup.html"
+	},
+	
 	"options_ui": {
 		"page": "options/index.html"
 	},
+
 	"permissions":[
 		"storage"
 	]
