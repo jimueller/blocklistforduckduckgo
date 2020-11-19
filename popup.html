@@ -5,20 +5,67 @@
     <meta name="viewport" content="width=device-width">
     <style>
         body {
+            width: 300px;
             padding: 1em;
+            background: whitesmoke;
+        }
+
+        h1,h2,h3,h4,h5 {
+          color: #bd4b2b;
+          margin: 0;
+        }
+
+        .add-domain-wrap {
+          display: flex;
+          height: 2em;
+          align-items: stretch;
+          align-content: stretch;
         }
 
         ul {
             list-style: none;
+            padding: 0;
+        }
+
+        #domain {
+          flex-grow: 4;
+          border: 1px solid gainsboro;
+          border-radius: 3px 0 0 3px;
+        }
+
+        #save{
+          background: #66ad57;
+          border: 1px solid #66ad57;
+          font-size: 1.3em;
+          font-weight: bold;
+          color: white;
+          border-radius: 0 3px 3px 0;
+        }
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: .3em 0;
+        }
+
+        .delete-domain {
+          font-size: 1.5em;
+        }
+
+        .delete-domain:hover {
+          font-weight: bold;
+          color: red;
         }
     </style>
   <body>
-    <div>
+    <h3>Blocklist for Duck Duck Go</h3>
+    <p>Block sites from Duck Duck Go search results</p>
+    <div class="add-domain-wrap">
         <input type="text" id="domain" placeholder="example.com"/>
         <button id="save">&#43;</button>
     </div>
     <div id="blocked-wrap">
-        <p>Blocked Domains:</p>
         <ul id="blocked-domains"></ul>
     </div>
     <script src="popup.js"></script>
