@@ -7,12 +7,32 @@ browser.storage.onChanged.addListener((changes, area) => {
   }
 });
 
+function isExcludedSitelink(siteLink) {
+  return blockedDomains.includes(siteLink.dataset.domain);
+}
+
 function removeResults(domains) {
   const results = document.querySelectorAll(".result");
+  const siteLink = document.querySelector(".results__sitelink--organics");
+
+  if (siteLink) {
+    const siteLinks = Array.from(
+      siteLink.querySelectorAll(".result__sitelink-col")
+    );
+    // hide sitelinks
+    if (siteLinks.some(isExcludedSitelink)) {
+      siteLink.style.display = "none";
+    } else {
+      siteLink.style.display = "";
+    }
+  }
+
+  // Hide Results
   results.forEach((r) => {
-    r.style.display = "";
     if (domains.includes(r.dataset.domain)) {
       r.style.display = "none";
+    } else {
+      r.style.display = "";
     }
   });
 }

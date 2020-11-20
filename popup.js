@@ -4,8 +4,6 @@ const domainList = document.querySelector("#blocked-domains");
 
 async function storeSettings(domainsValue) {
   const blockedDomains = domainsValue.split("\n") || [];
-
-  console.log(blockedDomains);
   await browser.storage.local.set({
     blockedDomains,
   });
@@ -17,7 +15,6 @@ async function loadDomains() {
   if (results && results.blockedDomains) {
     domains = JSON.parse(results.blockedDomains);
   }
-  console.log("returning domains:", domains);
   return domains;
 }
 
@@ -64,13 +61,9 @@ function onListClick(e) {
 }
 
 function renderDomainList(domains) {
-  console.log("Rendering domains", domains);
-  console.log("domainsList", domainList);
   domainList.innerHTML = "";
-  console.log("after blanking domains list");
 
   domains.map((d) => {
-    console.log("inserting domain");
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(d));
     li.setAttribute("class", "list-domain");
@@ -94,7 +87,6 @@ domainList.addEventListener("click", onListClick);
 
 async function init() {
   const domains = await loadDomains();
-  console.log("init domains", domains);
   renderDomainList(domains);
 }
 
